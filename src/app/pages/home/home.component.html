@@ -1,6 +1,6 @@
 <div>
-  <app-add-user (onAdd)="execOnAdd()"></app-add-user>
+  <app-add-user (onAdd)="onAdd()"></app-add-user>
 </div>
 <div class="mt-3">
-  <app-user-list [users]="users" (onDelete)="execOnDelete($event)"></app-user-list>
+  <app-user-list (onDelete)="onDelete()"></app-user-list>
 </div>

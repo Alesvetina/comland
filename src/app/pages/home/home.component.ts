@@ -1,38 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from "./../../services/user.service";
 import { User } from "./../../models/user";
+import { UserListComponent } from './../../components/user-list/user-list.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  @ViewChild(UserListComponent) userListComponent: UserListComponent;
 
-  users: User[];
+  constructor( ) { }
 
-  constructor(
-    private userService:UserService
-  ) {
-    this.users = [];
+  onAdd() {
+    this.userListComponent.getUsers();
   }
 
-  ngOnInit():void {
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.userService.get().then((res: any) => {
-      this.users = <User[]>res;
-    });
-  }
-
-  execOnAdd() {
-    this.getUsers();
-  }
-
-  execOnDelete($event:any) {
-    this.getUsers();
+  onDelete() {
+    this.userListComponent.getUsers();
   }
 
 }

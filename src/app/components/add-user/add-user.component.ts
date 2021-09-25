@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { User } from "../../models/user";
-import { UserService } from "../../services/user.service";
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-add-user',
@@ -12,25 +13,36 @@ import { UserService } from "../../services/user.service";
 export class AddUserComponent {
 
   @Output() onAdd = new EventEmitter();
-  user:User = new User();
+  user: User = new User();
+  submitted = false;
 
-  form:FormGroup = new FormGroup({
-    first_name: new FormControl(this.user.first_name || '', Validators.required),
+  form: FormGroup = new FormGroup({
+    name: new FormControl(this.user.name || '', Validators.required),
     gender: new FormControl(this.user.gender || '', Validators.required),
-    email: new FormControl(this.user.email || '', [Validators.required, Validators.email]),
-    phone: new FormControl(this.user.phone || '', Validators.required)
+    email: new FormControl(this.user.email || '', [Validators.email]),
+    phone: new FormControl(this.user.phone || '')
   });
 
-  constructor(private userService:UserService) {
-  }
+  constructor(
+    private userService: UserService,
+    private alertService: AlertService
+  ) { }
+
+  get f() { return this.form.controls; }
 
   add():void {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+
     this.user = this.form.value;
     this.userService.create(this.user)
-      .then(response => {
-        alert("User added");
+      .then(() => {
         this.clear();
         this.onAdd.emit();
+        this.submitted = false;
+        this.alertService.show('User added');
       });
   }
 

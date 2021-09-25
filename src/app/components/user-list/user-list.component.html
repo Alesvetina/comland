@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-body mx-lg-3 my-2">
-    <ul class="list-group">
+    <ul class="list-group" *ngIf="users.length > 0">
       <li *ngFor="let user of users" class="list-group-item d-flex align-items-center {{ user.gender }}">
         <div class="d-flex justify-content-between flex-column flex-lg-row flex-grow-1 overflow-hidden">
-          <div>{{ user.first_name }}</div>
+          <div>{{ user.name }}</div>
           <div class="d-flex">
             <div class="mr-4">
               <span *ngIf="user.email">{{ user.email }}</span>
@@ -13,10 +13,13 @@
             </div>
           </div>
         </div>
-        <div class="close-container" (click)="delete(user)">
+        <div class="close-container ms-2" (click)="delete(user)">
           <span class="close"></span>
         </div>
       </li>
     </ul>
+    <div *ngIf="users.length == 0">
+      No users yer. You can add using the form above.
+    </div>
   </div>
 </div>

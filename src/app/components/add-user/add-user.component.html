@@ -4,40 +4,49 @@
       <div class="form-row row">
         <div class="form-group col-12">
           <label for="inputName">Name *</label>
-          <input type="text" class="form-control" id="inputName" formControlName="first_name" />
+          <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" id="inputName" formControlName="name" />
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Name is required</div>
+          </div>
         </div>
       </div>
       <div class="form-row row">
         <div class="form-group col-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" id="genderMale" value="male" formControlName="gender" />
+            <input class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" type="radio" id="genderMale" value="male" formControlName="gender" />
             <label class="form-check-label" for="genderMale">Male</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" id="genderFemale" value="female" formControlName="gender" />
+            <input class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" type="radio" id="genderFemale" value="female" formControlName="gender" />
             <label class="form-check-label" for="genderFemale">Female</label>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+              <div *ngIf="f.gender.errors.required">Gender is required</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <h4 class="font-weight-bold">Contact information</h4>
-      <hr />
+      <h5 class="fw-bold">Contact information</h5>
+      <hr class="mt-0" />
 
       <div class="form-row row">
         <div class="form-group col-md-6">
-          <label for="inputEmail">Email *</label>
-          <input type="email" class="form-control" id="inputEmail" formControlName="email" aria-describedby="emailHelpBlock" />
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="inputEmail" formControlName="email" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
           <small id="emailHelpBlock" class="form-text text-muted">
             We'll never share your email with anyone else.
           </small>
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPhone">Telephone *</label>
+          <label for="inputPhone">Telephone</label>
           <input type="text" class="form-control" id="inputPhone" formControlName="phone" />
         </div>
       </div>
-      <button type="submit" class="btn btn-primary float-right px-4" [disabled]="!form.valid">Save</button>
-      <button type="button" class="btn btn-light float-right px-4 mr-2" (click)="clear()">Cancel</button>
+      <button type="submit" class="btn btn-primary float-end px-4">Save</button>
+      <button type="button" class="btn btn-light float-end px-4 me-2" (click)="clear()">Cancel</button>
     </form>
   </div>
 </div>
