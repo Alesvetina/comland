@@ -11,7 +11,7 @@ export class StorageService {
 
   constructor(
   ) {
-    this.dbPromise = openDB('keyval-store', 1, {
+    this.dbPromise = openDB('comland-db', 1, {
       upgrade(db: any) {
         db.createObjectStore(table);
       },
@@ -21,6 +21,7 @@ export class StorageService {
   async get(key: string) {
     return (await this.dbPromise).get(table, key);
   }
+
   async list() {
     let users = [];
     const keys = await this.keys();
@@ -32,7 +33,7 @@ export class StorageService {
     return users;
   }
 
-  async set(val: any) {
+  async create(val: any) {
     const keys = await this.keys();
     let key = 1;
     if(keys.length > 0) {

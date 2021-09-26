@@ -1,7 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { UserService } from "./../../services/user.service";
-import { User } from "./../../models/user";
-import { UserListComponent } from './../../components/user-list/user-list.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +6,7 @@ import { UserListComponent } from './../../components/user-list/user-list.compon
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  @ViewChild(UserListComponent) userListComponent: UserListComponent;
 
-  constructor( ) { }
-
-  onAdd() {
-    this.userListComponent.getUsers();
-  }
-
-  onDelete() {
-    this.userListComponent.getUsers();
-  }
+  constructor() { }
 
 }

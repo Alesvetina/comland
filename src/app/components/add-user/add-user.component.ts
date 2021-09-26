@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,6 @@ import { AlertService } from '../../services/alert.service';
 
 export class AddUserComponent {
 
-  @Output() onAdd = new EventEmitter();
   user: User = new User();
   submitted = false;
 
@@ -40,7 +39,6 @@ export class AddUserComponent {
     this.userService.create(this.user)
       .then(() => {
         this.clear();
-        this.onAdd.emit();
         this.submitted = false;
         this.alertService.show('User added');
       });
