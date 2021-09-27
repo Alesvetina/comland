@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { AlertService } from '../../services/alert.service';
@@ -29,7 +29,7 @@ export class AddUserComponent {
 
   get f() { return this.form.controls; }
 
-  add():void {
+  add() {
     this.submitted = true;
     if (this.form.invalid) {
       return;
